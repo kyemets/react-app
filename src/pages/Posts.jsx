@@ -7,12 +7,12 @@ import MyModal from '.././components/UI/modal/MyModal';
 import MyButton from '../components/UI/button/MyButton';
 import Loader from '../components/UI/loader/Loader';
 import MyPagination from '../components/UI/pagination/Pagination';
-import { usePosts } from '../hooks/usePosts';
-import PostService from '../API/PostService';
-import { useFetching } from '../hooks/useFetching';
-import { getPageCount } from '../utils/pages';
-import { useObserver } from '../hooks/useObserver';
 import MySelect from '../components/UI/select/MySelect';
+import PostService from '../API/PostService';
+import { getPageCount } from '../utils/pages';
+import { usePosts } from '../hooks/usePosts';
+import { useFetching } from '../hooks/useFetching';
+import { useObserver } from '../hooks/useObserver';
 
 
 function Posts () {
@@ -55,52 +55,55 @@ function Posts () {
 
   return (
     <div className="App">
-    <MyButton
-      style={{margin: '15px 0'}}
-      onClick={() => setModal(true)}
-    >
-      Create post
-    </MyButton>
-      <MyModal
-        visible={modal}
-        setVisible={setModal}  
-      >
-        <PostForm create={createPost} />
-      </MyModal>
-      <hr style={{margin: '15px 0'}}/>
-      <PostFilter 
-        filter={filter}
-        setFilter={setFilter}
-      />
-      <MySelect 
-        value={limit}
-        onChange={value => setLimit(value)}
-        defaultValue="Number of posts per page"
-        options={[
-            {value: 5, name: '5'},
-            {value: 10, name: '10'},
-            {value: 25, name: '25'},
-            {value: -1, name: 'all'},
+        <MyButton
+            style={{margin: '15px 0'}}
+            onClick={() => setModal(true)}
+        >
+            Create post
+        </MyButton>
+        <MyModal
+            visible={modal}
+            setVisible={setModal}  
+        >
+            <PostForm create={createPost} />
+        </MyModal>
+        
+        <hr style={{margin: '15px 0'}}/>
+        
+        <PostFilter 
+            filter={filter}
+            setFilter={setFilter}
+        />
+        <MySelect 
+            value={limit}
+            onChange={value => setLimit(value)}
+            defaultValue="Number of posts per page"
+            options={[
+                {value: 5, name: '5'},
+                {value: 10, name: '10'},
+                {value: 25, name: '25'},
+                {value: -1, name: 'all'},
+            ]}
+        />
+        {postError &&
+            <h1>Error {postError}</h1>
+        }
+        <PostList posts={sortedAndSearchedPosts} remove={removePost} title="List of mockdata" />
+        <div ref={lastElement} style={{height: 20, background: 'red'}} />
 
-        ]}
-      />
-      {postError &&
-        <h1>Error {postError}</h1>
-      }
-      <PostList posts={sortedAndSearchedPosts} remove={removePost} title="List of JavaScript" />
-      <div ref={lastElement} style={{height: 20, background: 'red'}} />
-
-      {isPostsLoading && 
-        <div style={{display: 'flex', justifyContent: 'center', marginTop: '50px'}}><Loader /></div>
-      }
-      
-      <MyPagination 
-        page={page}
-        changePage={changePage}
-        totalPages={totalPages}
-      />
+        {isPostsLoading && 
+            <div style={{display: 'flex', justifyContent: 'center', marginTop: '50px'}}>
+                <Loader />
+            </div>
+        }
+    
+        <MyPagination 
+            page={page}
+            changePage={changePage}
+            totalPages={totalPages}
+        />
     </div>
-  );
+    );
 }
 
 export default Posts;

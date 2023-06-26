@@ -1,11 +1,12 @@
-import React, {useContext} from 'react';
 import '../../../styles/App.css';
+import React, {useContext} from 'react';
 import {Link} from 'react-router-dom'
 import MyButton from '../button/MyButton';
 import {AuthContext} from '../../../context/index';
 
+
 const Navbar = () => {
-  const {isAuth, setIsAuth} = useContext(AuthContext); 
+  const {setIsAuth} = useContext(AuthContext); 
 
   const logout = () => {
     setIsAuth(false);
@@ -13,19 +14,19 @@ const Navbar = () => {
   }
 
 
-    return (
-      <div className="navbar">
-        <MyButton
-          onClick={logout}
-        >
-          Logout
-        </MyButton>
-        <div className='navbar__links'>
-          <Link to='/about'>About app</Link>
-          <Link to='/posts'>Posts</Link>
-        </div>
+  return (
+    <div className="navbar">
+      <MyButton
+        onClick={logout}
+      >
+        Logout
+      </MyButton>
+      <div className='navbar__links'>
+        <Link to='/about'>About app</Link>
+        <Link to='/posts'>Posts</Link>
       </div>
-    )
+    </div>
+  )
 }
 
 export default Navbar;

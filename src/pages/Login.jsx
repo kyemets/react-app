@@ -1,7 +1,8 @@
 import React, {useContext} from 'react';
-import {AuthContext} from '../context/index'
 import MyInput from '../components/UI/input/MyInput';
 import MyButton from '../components/UI/button/MyButton';
+import {AuthContext} from '../context/index'
+
 
 const Login = () => {
     const {setIsAuth} = useContext(AuthContext);
@@ -16,8 +17,18 @@ const Login = () => {
         <div>
             <h1>Login page</h1>
             <form onSubmit={login}>
-                <MyInput type="text" name="username" placeholder="Login"/>
-                <MyInput type="password" name="password" placeholder="Password"/>
+                <MyInput 
+                    type="text" 
+                    name="username"
+                    value="root" 
+                    placeholder="Login"
+                />
+                <MyInput 
+                    type="password"
+                    name="password" 
+                    value="root" 
+                    placeholder="Password"    
+                />
                 <MyButton>Login</MyButton>
             </form>
         </div>
